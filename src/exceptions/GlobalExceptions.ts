@@ -14,7 +14,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const message = this.customMessage || exception.message;
 
-    console.error(`Error: ${message}, Status: ${status}, Path: ${request.url}`);
 
     this.handleAlert(status);
 
@@ -23,7 +22,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       .json({
         statusCode: status,
         timestamp: new Date().toISOString(),
-        path: request.url
+        path: request.url,
+        message: message
       });
   }
 
